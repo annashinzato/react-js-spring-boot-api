@@ -1,11 +1,19 @@
 package sysconstucao.crm.model;
 
-public class ConsultaEstoque {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class ConsultaEstoque {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private long codProduto;
 	private String nomeProduto;
 	private int estoque;
-	private int quantidade;
+	
 	
 	public long getCodProduto() {
 		return codProduto;

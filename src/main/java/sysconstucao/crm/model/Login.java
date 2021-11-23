@@ -11,6 +11,8 @@ public class Login {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String email;
 	private int senha;
+	
+	
 	public String getEmail() {
 		return email;
 	}

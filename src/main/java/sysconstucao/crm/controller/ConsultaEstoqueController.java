@@ -44,11 +44,7 @@ public class ConsultaEstoqueController {
 		return ConsultaEstoqueRepository.save(ConsultaEstoque);
 	}
 	
-	/*entrada de estoque*/
-	public void entradadeProduto(int estoque,int quantidade) {
-		estoque = estoque + quantidade;
-		System.out.println("total de itens" + estoque);
-	}
+
 	
 	
 }
