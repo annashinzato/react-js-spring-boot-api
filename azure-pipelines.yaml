@@ -1,0 +1,93 @@
+trigger:
+- master
+
+variables:
+- group: project
+
+pool:
+  name: Default
+
+jobs:
+- job: build
+  displayName: Build
+
+  container:
+    image: maven:3-openjdk-11
+    endpoint: docker-hub-registry
+
+  workspace:
+    clean: all
+
+  steps:
+  - task: Maven@3
+    displayName: Build
+    inputs:
+      mavenPomFile: $(Build.SourcesDirectory)/pom.xml
+      goals: -B -e package
+      javaHomeOption: JDKVersion
+      mavenVersionOption: Default
+      sqMavenPluginVersionChoice: latest
+
+  - script: mv *.jar $(Build.ArtifactStagingDirectory)/app.jar
+    displayName: Move Artifact to Staging
+    workingDirectory: $(Build.SourcesDirectory)/target
+  
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Artifact to Azure Interface
+    inputs:
+      PathtoPublish: $(Build.ArtifactStagingDirectory)
+      ArtifactName: artifact
+      publishLocation: Container
+
+- job: docker
+  displayName: Create Docker Image
+  
+  dependsOn: build
+  condition: succeeded()
+
+  workspace:
+    clean: all
+
+  steps:
+  - task: DownloadBuildArtifacts@0
+    displayName: Download Artifact
+    inputs:
+      buildType: current
+      downloadType: single
+      artifactName: artifact
+      itemPattern: '**/app.jar'
+      downloadPath: $(Agent.TempDirectory)
+
+  - script: |
+      mkdir -p $(Build.SourcesDirectory)/bin
+      mv app.jar $(Build.SourcesDirectory)/bin
+    displayName: Move Artifact
+    workingDirectory: $(Agent.TempDirectory)/artifact
+
+  - task: Docker@2
+    displayName: Docker Login
+    inputs:
+      command: login
+      containerRegistry: docker-hub-registry
+
+  - task: Docker@2
+    displayName: Docker Build
+    inputs:
+      command: build
+      containerRegistry: az-registry
+      repository: api-backend
+      buildContext: $(Build.SourcesDirectory)
+      Dockerfile: Dockerfile
+      tags: |
+        $(Build.BuildNumber)
+        latest
+
+  - task: Docker@2
+    displayName: Docker Push
+    inputs:
+      command: push
+      containerRegistry: az-registry
+      repository: api-backend
+      tags: |
+        $(Build.BuildNumber)
+        latest
