@@ -26,7 +26,6 @@ jobs:
       goals: -B -e package
       javaHomeOption: JDKVersion
       mavenVersionOption: Default
-      sqMavenPluginVersionChoice: latest
 
   - script: mv *.jar $(Build.ArtifactStagingDirectory)/app.jar
     displayName: Move Artifact to Staging
