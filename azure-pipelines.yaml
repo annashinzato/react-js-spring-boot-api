@@ -5,7 +5,7 @@ variables:
 - group: project
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default
 
 jobs:
 - job: build
