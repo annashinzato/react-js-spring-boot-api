@@ -13,11 +13,9 @@ public class CadastroProdutos {
 	
 	@Column(nullable = false)
 	private long id;
-	
 	private String NomeProduto;
 	public String Categoria;
 	public int Date;
-	
 	
 	public long getId() {
 		return id;
@@ -25,19 +23,11 @@ public class CadastroProdutos {
 	public void setId(long id) {
 		this.id = id;
 	}
-		
 	public String getNomeProduto() {
 		return NomeProduto;
 	}
 	public void setNomeProduto(String nomeProduto) {
 		NomeProduto = nomeProduto;
-	}
-	
-	public int getDate() {
-		return Date;
-	}
-	public void setDate(int date) {
-		Date = date;
 	}
 	public String getCategoria() {
 		return Categoria;
@@ -45,5 +35,12 @@ public class CadastroProdutos {
 	public void setCategoria(String categoria) {
 		Categoria = categoria;
 	}
+	public int getDate() {
+		return Date;
+	}
+	public void setDate(int date) {
+		Date = date;
+	}
 	
+
 }
