@@ -11,7 +11,7 @@ public class Security implements WebMvcConfigurer {
 	
 	public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("GET", "POST");
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
     }
 	
 	 @Bean
@@ -24,4 +24,5 @@ public class Security implements WebMvcConfigurer {
 	            }
 	        };
 	    }
+	 
 }
