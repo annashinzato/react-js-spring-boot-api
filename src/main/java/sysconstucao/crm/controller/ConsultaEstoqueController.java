@@ -17,7 +17,7 @@ import sysconstucao.crm.model.ConsultaEstoque;
 
 @RestController
 @RequestMapping("/consulta")
-public class ConsultaEstoqueController {
+public class ConsultaEstoqueController  {
 
 	@Autowired
 	private ConsultaEstoqueRepository ConsultaEstoqueRepository;
