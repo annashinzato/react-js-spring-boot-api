@@ -44,6 +44,8 @@ public class ConsultaEstoqueController  {
 		return ConsultaEstoqueRepository.save(ConsultaEstoque);
 	}
 	
+	
+	
 
 	
 	
