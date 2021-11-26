@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class ConsultaEstoque {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	private long codProduto;
 	private String nomeProduto;
 	private int estoque;

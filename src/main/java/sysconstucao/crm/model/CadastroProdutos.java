@@ -1,6 +1,8 @@
 package sysconstucao.crm.model;
 
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,10 +11,10 @@ import javax.persistence.Id;
 @Entity
 public class CadastroProdutos {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private long id;
-	private String NomeP;
+	public String NomeP;
 	public String Categoria;
 	public String Data;
 	
@@ -37,10 +39,10 @@ public class CadastroProdutos {
 	public String getData() {
 		return Data;
 	}
-	public void setData(String data) {
-		Data = data;
+	/*public void setData(String data) {
+		Data = ;
 	}
-	
+	*/
 
 
 }
